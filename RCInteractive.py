@@ -26,6 +26,7 @@ def run():
     
     print("\nrunning\n...")
     print(pprinted_res(n, randomResults(n)))
+    print("...")
     
     
 if (__name__ == "__main__"):
