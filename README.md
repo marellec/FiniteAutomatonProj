@@ -1,7 +1,9 @@
 
 
 This finite automaton is written in Python.
-For the purposes of the assignment, the folder path is: '/tmp/marelle-leon'
+For the purposes of the assignment, the folder path is: 
+
+        '/tmp/marelle-leon'
 
 ## EXECUTABLE
 
@@ -25,7 +27,7 @@ For the purposes of the assignment, the folder path is: '/tmp/marelle-leon'
 
 2. enter project directory
 
-        cd FiniteAutomatonProj
+        $ cd FiniteAutomatonProj
 
 3. run tests
 
