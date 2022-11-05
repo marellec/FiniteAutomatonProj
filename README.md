@@ -2,46 +2,43 @@
 
 This finite automaton is written in Python.
 
-For the purposes of the assignment, the folder path is:
-
-    /tmp/marelle-leon
+For the purposes of the assignment, the folder path is: '/tmp/marelle-leon'
 
 
 
-
-/* EXECUTABLE */
-
-
-// create executable
-
-    1. $ pip install -e /tmp/marelle-leon/FiniteAutomatonProj
-
-// run finite automaton
-
-    2. $ FAInteractive
-
-// run random passcode cracking
-
-    3. $ RCInteractive
+>>> EXECUTABLE <<<
 
 
+1. ---- create executable
 
-/* UNIT TEST COVERAGE */
+    $ pip install -e /tmp/marelle-leon/FiniteAutomatonProj
+
+2. ---- run finite automaton
+
+    $ FAInteractive
+
+3. ---- run random passcode cracking
+
+    $ RCInteractive
 
 
-// If you don't already have the python coverage module intalled, run this:
 
-    1. $ pip install coverage
+>>> UNIT TEST COVERAGE <<<
 
-// enter project directory
 
-    2. cd FiniteAutomatonProj
+1. ---- if you don't already have the python coverage module intalled, run this:
 
-// run tests
+    $ pip install coverage
 
-    3. $ coverage run -m unittest discover
+2. ---- enter project directory
 
-// view coverage
+    cd FiniteAutomatonProj
 
-    4. $ coverage report
+3. ---- run tests
+
+    $ coverage run -m unittest discover
+
+4. ---- view coverage
+
+    $ coverage report
 
