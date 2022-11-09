@@ -23,7 +23,7 @@ def run():
     
     while (True):
         
-        # get user input , 
+        # get user input,
         # feed input one character at a time to FA, 
         # print output
         print("".join(fa.next(letter) for letter in input("")), end="")
