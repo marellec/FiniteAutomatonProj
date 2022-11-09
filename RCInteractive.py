@@ -10,22 +10,39 @@ from PrettyPrinting import pprinted_res
 
 def run():
     
-    n_res: str = ""
+    DEFAULT_PASSCODE = "84985"
+    DEFAULT_UNLOCK_CODE = "1"
+    DEFAULT_LOCK_CODE = "4"
+    
+    # user trial count input
+    n_response: str = ""
     is_number: bool = False
     
     while (not is_number):
-        n_res = input("\nENTER TRIAL COUNT: ")
         
+        n_response = input("\nENTER TRIAL COUNT: ")
+        
+        # check for valid number
         try:
-            int(n_res)
+            int(n_response)
             is_number = True
         except ValueError:
             print("\n    That isn't a number.")
     
-    n: int = int(n_res)
+    # parse response
+    n: int = int(n_response)
     
     print("\nrunning\n...")
-    print(pprinted_res(n, randomResults(n)))
+    print(
+        pprinted_res(n, 
+            randomResults(
+                n,
+                DEFAULT_PASSCODE,
+                DEFAULT_UNLOCK_CODE,
+                DEFAULT_LOCK_CODE
+            )
+        )
+    )
     print("...")
     
     

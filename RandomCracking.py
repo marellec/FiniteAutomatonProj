@@ -1,81 +1,48 @@
 
 import random
-from FiniteAutomaton import FAState
+from FiniteAutomaton import FA, make_FA_logic
 
-
-DEFAULT_PASSCODE = "23344" #"84985"
-UNLOCK_CODE = "1"
-LOCK_CODE = "4"
-
-def randomCrack(PASSCODE: str = DEFAULT_PASSCODE):
+def randomCrack(
+    PASSCODE: str,
+    UNLOCK_CODE: str,
+    LOCK_CODE: str
+):
     
     # whether it has been cracked
     cracked: bool = False
     # time in seconds
     guesses: int = 0 
     
-    # start state (q0)
-    q: int = FAState.NEUTRAL
+    
+    _, transition_function, q0 = make_FA_logic(
+        PASSCODE, 
+        UNLOCK_CODE,
+        LOCK_CODE
+    )
+    
+    fa = FA(transition_function, q0)
+    
     
     while (not cracked):
         
         # random guess
         letter: str = str(random.randint(0, 9))
-        
-        # print(f"letter: {letter}")
-        
         guesses += 1
         
-        match q:
-            
-            case FAState.NEUTRAL:
-                
-                if (letter == PASSCODE[0]):
-                    q = FAState._1
-                else:
-                    q = FAState.NEUTRAL
-                    
-            case FAState._1:
-                
-                if (letter == PASSCODE[1]):
-                    q = FAState._2
-                else:
-                    q = FAState.NEUTRAL
-                    
-            case FAState._2:
-                
-                if (letter == PASSCODE[2]):
-                    q = FAState._3
-                else:
-                    q = FAState.NEUTRAL
-                    
-            case FAState._3:
-                
-                if (letter == PASSCODE[3]):
-                    q = FAState._4
-                else:
-                    q = FAState.NEUTRAL
-                    
-            case FAState._4:
-                
-                if (letter == PASSCODE[4]):
-                    q = FAState.CHECK
-                else:
-                    q = FAState.NEUTRAL
-                    
-            case FAState.CHECK:
-                
-                if (letter == UNLOCK_CODE): # cracked
-                    cracked = True
-                    return guesses
-                q = FAState.NEUTRAL
-    
-    
+        # FA output
+        output = fa.next(letter)
+        
+        if (output == "UNLOCK\n"):
+            cracked = True
+            return guesses
+
 # Does n attacks
 # Returns (maximum, minimum, average) time in seconds
 def randomResults(
-        n = 100, PASSCODE: 
-        str = DEFAULT_PASSCODE
+        n, 
+        PASSCODE: str,
+        UNLOCK_CODE: str,
+        LOCK_CODE: str
     ) -> tuple[int, int, float]:
     
     # results
@@ -85,7 +52,7 @@ def randomResults(
     
     for _ in range(n):
         # time in seconds
-        guesses: int = randomCrack(PASSCODE)
+        guesses: int = randomCrack(PASSCODE, UNLOCK_CODE, LOCK_CODE)
         
         total += guesses
         minimum = minimum if (minimum <= guesses and minimum > 0) else guesses

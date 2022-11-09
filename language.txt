@@ -1,88 +1,105 @@
 
 
-#  An automaton can be represented by a 5-tuple (Q, ∑, δ, q0, F), where −
-
-#  Q is a finite set of states.
-#
-#       states: { _0, _1, _2, _3, _4, CHECK, NEUTRAL }
-
-#  ∑ is a finite set of symbols, called the alphabet of the automaton.
-
-#       alphabet: { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
-
-#  δ is the transition function.
-
-#       δ(NEUTRAL, '0') = NEUTRAL
-#       δ(NEUTRAL, '1') = NEUTRAL
-#       δ(NEUTRAL, '2') = NEUTRAL
-#       δ(NEUTRAL, '3') = NEUTRAL
-#       δ(NEUTRAL, '4') = NEUTRAL
-#       δ(NEUTRAL, '5') = NEUTRAL
-#       δ(NEUTRAL, '6') = NEUTRAL
-#       δ(NEUTRAL, '7') = NEUTRAL
-#       δ(NEUTRAL, '8') = _1
-#       δ(NEUTRAL, '9') = NEUTRAL
-#
-#       δ(_1, '0') = NEUTRAL
-#       δ(_1, '1') = NEUTRAL
-#       δ(_1, '2') = NEUTRAL
-#       δ(_1, '3') = NEUTRAL
-#       δ(_1, '4') = _2
-#       δ(_1, '5') = NEUTRAL
-#       δ(_1, '6') = NEUTRAL
-#       δ(_1, '7') = NEUTRAL
-#       δ(_1, '8') = NEUTRAL
-#       δ(_1, '9') = NEUTRAL
-#
-#       δ(_2, '0') = NEUTRAL
-#       δ(_2, '1') = NEUTRAL
-#       δ(_2, '2') = NEUTRAL
-#       δ(_2, '3') = NEUTRAL
-#       δ(_2, '4') = NEUTRAL
-#       δ(_2, '5') = NEUTRAL
-#       δ(_2, '6') = NEUTRAL
-#       δ(_2, '7') = NEUTRAL
-#       δ(_2, '8') = NEUTRAL
-#       δ(_2, '9') = _3
-#
-#       δ(_3, '0') = NEUTRAL
-#       δ(_3, '1') = NEUTRAL
-#       δ(_3, '2') = NEUTRAL
-#       δ(_3, '3') = NEUTRAL
-#       δ(_3, '4') = NEUTRAL
-#       δ(_3, '5') = NEUTRAL
-#       δ(_3, '6') = NEUTRAL
-#       δ(_3, '7') = NEUTRAL
-#       δ(_3, '8') = _4
-#       δ(_3, '9') = NEUTRAL
-#       
-#       δ(_4, '0') = NEUTRAL
-#       δ(_4, '1') = NEUTRAL
-#       δ(_4, '2') = NEUTRAL
-#       δ(_4, '3') = NEUTRAL
-#       δ(_4, '4') = NEUTRAL
-#       δ(_4, '5') = CHECK
-#       δ(_4, '6') = NEUTRAL
-#       δ(_4, '7') = NEUTRAL
-#       δ(_4, '8') = NEUTRAL
-#       δ(_4, '9') = NEUTRAL
-#
-#       δ(CHECK, '0') = NEUTRAL
-#       δ(CHECK, '1') = NEUTRAL
-#       δ(CHECK, '2') = NEUTRAL
-#       δ(CHECK, '3') = NEUTRAL
-#       δ(CHECK, '4') = NEUTRAL
-#       δ(CHECK, '5') = NEUTRAL
-#       δ(CHECK, '6') = NEUTRAL
-#       δ(CHECK, '7') = NEUTRAL
-#       δ(CHECK, '8') = NEUTRAL
-#       δ(CHECK, '9') = NEUTRAL
+For this finite automaton, I used an enum to 
+hold every state in Q, the state set.
+The current state is akways set to one of these states.
+For each letter given in the string, the FA checks the 
+current state and the given letter to determine the next state 
+based on δ, the transition function.
+This is implemented using a match for the current state and
+if/else checks for the given letter.
+Whether the FA should output "LOCK" or "UNLOCK" is also determined by
+if/else checks within the CHECK state.
 
 
-#  q0 is the initial state from where any input is processed (q0 ∈ Q).
-#
-#       initial state = NEUTRAL
+The regular expression is? [d]*[223341+223344]+[d]*
 
-#  F is a set of final state/states of Q (F ⊆ Q).
-#
-#     final states: { _0, _1, _2, _3, _4, CHECK, NEUTRAL }
+
+An automaton can be represented by a 5-tuple (Q, ∑, δ, q0, F), where −
+
+Q is a finite set of states.
+
+    states: { _0, _1, _2, _3, _4, CHECK, NEUTRAL }
+
+∑ is a finite set of symbols, called the alphabet of the automaton.
+
+    alphabet: { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+
+δ is the transition function.
+
+    # needs output
+
+    δ(NEUTRAL, '0') = (NEUTRAL, "")
+    δ(NEUTRAL, '1') = (NEUTRAL, "")
+    δ(NEUTRAL, '2') = (NEUTRAL, "")
+    δ(NEUTRAL, '3') = (NEUTRAL, "")
+    δ(NEUTRAL, '4') = (NEUTRAL, "")
+    δ(NEUTRAL, '5') = (NEUTRAL, "")
+    δ(NEUTRAL, '6') = (NEUTRAL, "")
+    δ(NEUTRAL, '7') = (NEUTRAL, "")
+    δ(NEUTRAL, '8') = (_1, "")
+    δ(NEUTRAL, '9') = (NEUTRAL, "")
+
+    δ(_1, '0') = (NEUTRAL, "")
+    δ(_1, '1') = (NEUTRAL, "")
+    δ(_1, '2') = (NEUTRAL, "")
+    δ(_1, '3') = (NEUTRAL, "")
+    δ(_1, '4') = _2
+    δ(_1, '5') = NEUTRAL
+    δ(_1, '6') = NEUTRAL
+    δ(_1, '7') = NEUTRAL
+    δ(_1, '8') = NEUTRAL
+    δ(_1, '9') = NEUTRAL
+
+    δ(_2, '0') = NEUTRAL
+    δ(_2, '1') = NEUTRAL
+    δ(_2, '2') = NEUTRAL
+    δ(_2, '3') = NEUTRAL
+    δ(_2, '4') = NEUTRAL
+    δ(_2, '5') = NEUTRAL
+    δ(_2, '6') = NEUTRAL
+    δ(_2, '7') = NEUTRAL
+    δ(_2, '8') = NEUTRAL
+    δ(_2, '9') = _3
+
+    δ(_3, '0') = NEUTRAL
+    δ(_3, '1') = NEUTRAL
+    δ(_3, '2') = NEUTRAL
+    δ(_3, '3') = NEUTRAL
+    δ(_3, '4') = NEUTRAL
+    δ(_3, '5') = NEUTRAL
+    δ(_3, '6') = NEUTRAL
+    δ(_3, '7') = NEUTRAL
+    δ(_3, '8') = _4
+    δ(_3, '9') = NEUTRAL
+    
+    δ(_4, '0') = NEUTRAL
+    δ(_4, '1') = NEUTRAL
+    δ(_4, '2') = NEUTRAL
+    δ(_4, '3') = NEUTRAL
+    δ(_4, '4') = NEUTRAL
+    δ(_4, '5') = CHECK
+    δ(_4, '6') = NEUTRAL
+    δ(_4, '7') = NEUTRAL
+    δ(_4, '8') = NEUTRAL
+    δ(_4, '9') = NEUTRAL
+
+    δ(CHECK, '0') = NEUTRAL
+    δ(CHECK, '1') = NEUTRAL
+    δ(CHECK, '2') = NEUTRAL
+    δ(CHECK, '3') = NEUTRAL
+    δ(CHECK, '4') = NEUTRAL
+    δ(CHECK, '5') = NEUTRAL
+    δ(CHECK, '6') = NEUTRAL
+    δ(CHECK, '7') = NEUTRAL
+    δ(CHECK, '8') = NEUTRAL
+    δ(CHECK, '9') = NEUTRAL
+
+
+q0 is the initial state from where any input is processed (q0 ∈ Q).
+
+    initial state = NEUTRAL
+
+F is a set of final state/states of Q (F ⊆ Q).
+
+    final states: { _0, _1, _2, _3, _4, CHECK, NEUTRAL }

@@ -1,149 +1,105 @@
 
-
-DEFAULT_PASSCODE = "84985"
-UNLOCK_CODE = "1"
-LOCK_CODE = "4"
-
-# states (Q)
-class FAState:
-    _1 = 1              # states that keep track of PASSCODE index
-    _2 = 2         
-    _3 = 4         
-    _4 = 8         
-    NEUTRAL = 16    # q0
-    CHECK = 32      # checking to lock/unlock since PASSCODE was recognized  
-
-def evaluate_code_verbose(
-        input_string: str, 
-        PASSCODE: str = DEFAULT_PASSCODE
-    ) -> list[str]:
+class FA:
+    
+    def __init__(self, transition_function, q0) -> None:
+        self.state = q0
+        self.transition_function = transition_function
         
-    """ Evaluate input string, record the locking/unlocking """
-    
-    record: list[str] = []
-    
-    # start state (q0)
-    q: int = FAState.NEUTRAL
-    
-    for i, letter in enumerate(input_string):
-        
-        record.append(f"{i}: {q}   {letter}")
-        
-        match q:
-            
-            case FAState.NEUTRAL:
-                
-                if (letter == PASSCODE[0]):
-                    q = FAState._1
-                else:
-                    q = FAState.NEUTRAL
-                    
-            case FAState._1:
-                
-                if (letter == PASSCODE[1]):
-                    q = FAState._2
-                else:
-                    q = FAState.NEUTRAL
-                    
-            case FAState._2:
-                
-                if (letter == PASSCODE[2]):
-                    q = FAState._3
-                else:
-                    q = FAState.NEUTRAL
-                    
-            case FAState._3:
-                
-                if (letter == PASSCODE[3]):
-                    q = FAState._4
-                else:
-                    q = FAState.NEUTRAL
-                    
-            case FAState._4:
-                
-                if (letter == PASSCODE[4]):
-                    q = FAState.CHECK
-                else:
-                    q = FAState.NEUTRAL
-                    
-                    
-            case FAState.CHECK:
-                
-                if (letter == LOCK_CODE):
-                    record.append(f"LOCK {i}")
-                elif (letter == UNLOCK_CODE): 
-                    record.append(f"UNLOCK {i}")
-                q = FAState.NEUTRAL
-                
-    record.append(f"final: {q}")
-    
-    return record
-
-
-def evaluate_code(
-        input_string: str, 
-        PASSCODE: str = DEFAULT_PASSCODE
-    ) -> list[str]:
-    
-    return [r.split()[0] for r in evaluate_code_verbose(input_string, PASSCODE) 
-            if (r.split()[0] == "LOCK" or r.split()[0] == "UNLOCK")]
+    def next(self, input_val):
+        # update state and return output
+        # using transition function
+        self.state, output_val = self.transition_function(self.state, input_val)
+        return output_val
     
 
-def evaluate_code_with_side_effects(
-        input_string: str, 
-        PASSCODE: str = DEFAULT_PASSCODE
+def make_FA_logic(
+    PASSCODE: str,
+    UNLOCK_CODE: str,
+    LOCK_CODE: str
+):
+    class FAStates:
+        _1 = 1          # states that keep track of PASSCODE index
+        _2 = 2         
+        _3 = 4         
+        _4 = 8         
+        NEUTRAL = 16    # q0
+        CHECK = 32      # checking to lock/unlock since PASSCODE was recognized  
+    
+    """ Returns (Q, δ, q0) """
+    
+    def transition_function(
+        q: int,
+        letter: str, 
     ):
-        
-    """ Evaluate input string, record the locking/unlocking """
-    
-    # start state (q0)
-    q: int = FAState.NEUTRAL
-    
-    for letter in input_string:
+            
+        """  """
         
         match q:
             
-            case FAState.NEUTRAL:
+            case FAStates.NEUTRAL:
                 
                 if (letter == PASSCODE[0]):
-                    q = FAState._1
+                    return (FAStates._1, "")
+                elif (letter.isdigit()):
+                    return (FAStates.NEUTRAL, "")
                 else:
-                    q = FAState.NEUTRAL
+                    return (q, "")
                     
-            case FAState._1:
+            case FAStates._1:
                 
                 if (letter == PASSCODE[1]):
-                    q = FAState._2
+                    return (FAStates._2, "")
+                elif (letter.isdigit()):
+                    return (FAStates.NEUTRAL, "")
                 else:
-                    q = FAState.NEUTRAL
+                    return (q, "")
                     
-            case FAState._2:
+            case FAStates._2:
                 
                 if (letter == PASSCODE[2]):
-                    q = FAState._3
+                    return (FAStates._3, "")
+                elif (letter.isdigit()):
+                    return (FAStates.NEUTRAL, "")
                 else:
-                    q = FAState.NEUTRAL
+                    return (q, "")
                     
-            case FAState._3:
+            case FAStates._3:
                 
                 if (letter == PASSCODE[3]):
-                    q = FAState._4
+                    return (FAStates._4, "")
+                elif (letter.isdigit()):
+                    return (FAStates.NEUTRAL, "")
                 else:
-                    q = FAState.NEUTRAL
+                    return (q, "")
                     
-            case FAState._4:
+            case FAStates._4:
                 
                 if (letter == PASSCODE[4]):
-                    q = FAState.CHECK
+                    return (FAStates.CHECK, "")
+                elif (letter.isdigit()):
+                    return (FAStates.NEUTRAL, "")
                 else:
-                    q = FAState.NEUTRAL
-                    
-                    
-            case FAState.CHECK:
+                    return (q, "")
+            
+            case FAStates.CHECK:
                 
                 if (letter == LOCK_CODE):
-                    print("LOCK")
+                    return (FAStates.NEUTRAL, "LOCK\n")
                 elif (letter == UNLOCK_CODE): 
-                    print("UNLOCK")
-                q = FAState.NEUTRAL
+                    return (FAStates.NEUTRAL, "UNLOCK\n")
+                elif (letter.isdigit()):
+                    return (FAStates.NEUTRAL, "")
+                else:
+                    return (q, "")
+    
+    return (FAStates, transition_function, FAStates.NEUTRAL)
+
+
+
+
+
+
+    
+
+
                 
