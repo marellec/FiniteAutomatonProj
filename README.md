@@ -8,17 +8,13 @@ For the purposes of the assignment, the folder path is:
 
 ### EXECUTABLE
 
-1. create executable
+1. run finite automaton
 
-        $ python -m pip install -e /tmp/marelle-leon/FiniteAutomatonProj
-
-2. run finite automaton
-
-        $ FAInteractive
+        $ python3 /tmp/marelle-leon/FiniteAutomatonProj/FAInteractive.py
 
 3. run random passcode cracking
 
-        $ RCInteractive
+        $ python3 /tmp/marelle-leon/FiniteAutomatonProj/RCInteractive.py
 
 ### UNIT TEST COVERAGE
 
