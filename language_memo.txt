@@ -79,7 +79,7 @@ O is a set of outputs of the automaton.
     δ(_1, '5') = (NEUTRAL, "")
     δ(_1, '6') = (NEUTRAL, "")
     δ(_1, '7') = (NEUTRAL, "")
-    δ(_1, '8') = (NEUTRAL, "")
+    δ(_1, '8') = (_1, "")
     δ(_1, '9') = (NEUTRAL, "")
 
     δ(_2, '0') = (NEUTRAL, "")
@@ -90,7 +90,7 @@ O is a set of outputs of the automaton.
     δ(_2, '5') = (NEUTRAL, "")
     δ(_2, '6') = (NEUTRAL, "")
     δ(_2, '7') = (NEUTRAL, "")
-    δ(_2, '8') = (NEUTRAL, "")
+    δ(_2, '8') = (_1, "")
     δ(_2, '9') = (_3, "")
 
     δ(_3, '0') = (NEUTRAL, "")
@@ -112,7 +112,7 @@ O is a set of outputs of the automaton.
     δ(_4, '5') = (CHECK, "")
     δ(_4, '6') = (NEUTRAL, "")
     δ(_4, '7') = (NEUTRAL, "")
-    δ(_4, '8') = (NEUTRAL, "")
+    δ(_4, '8') = (_1, "")
     δ(_4, '9') = (NEUTRAL, "")
 
     δ(CHECK, '0') = (NEUTRAL, "")
@@ -123,7 +123,7 @@ O is a set of outputs of the automaton.
     δ(CHECK, '5') = (NEUTRAL, "")
     δ(CHECK, '6') = (NEUTRAL, "")
     δ(CHECK, '7') = (NEUTRAL, "")
-    δ(CHECK, '8') = (NEUTRAL, "")
+    δ(CHECK, '8') = (_1, "")
     δ(CHECK, '9') = (NEUTRAL, "")
 
 

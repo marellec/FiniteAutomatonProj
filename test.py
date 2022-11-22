@@ -61,7 +61,7 @@ class Test(unittest.TestCase):
         self.assertEqual(tf(States._1, '5'), (States.NEUTRAL, ""))
         self.assertEqual(tf(States._1, '6'), (States.NEUTRAL, ""))
         self.assertEqual(tf(States._1, '7'), (States.NEUTRAL, ""))
-        self.assertEqual(tf(States._1, '8'), (States.NEUTRAL, ""))
+        self.assertEqual(tf(States._1, '8'), (States._1, ""))
         self.assertEqual(tf(States._1, '9'), (States.NEUTRAL, ""))
         
         self.assertEqual(tf(States._2, '0'), (States.NEUTRAL, ""))
@@ -72,7 +72,7 @@ class Test(unittest.TestCase):
         self.assertEqual(tf(States._2, '5'), (States.NEUTRAL, ""))
         self.assertEqual(tf(States._2, '6'), (States.NEUTRAL, ""))
         self.assertEqual(tf(States._2, '7'), (States.NEUTRAL, ""))
-        self.assertEqual(tf(States._2, '8'), (States.NEUTRAL, ""))
+        self.assertEqual(tf(States._2, '8'), (States._1, ""))
         self.assertEqual(tf(States._2, '9'), (States._3, ""))
         
         self.assertEqual(tf(States._3, '0'), (States.NEUTRAL, ""))
@@ -94,7 +94,7 @@ class Test(unittest.TestCase):
         self.assertEqual(tf(States._4, '5'), (States.CHECK, ""))
         self.assertEqual(tf(States._4, '6'), (States.NEUTRAL, ""))
         self.assertEqual(tf(States._4, '7'), (States.NEUTRAL, ""))
-        self.assertEqual(tf(States._4, '8'), (States.NEUTRAL, ""))
+        self.assertEqual(tf(States._4, '8'), (States._1, ""))
         self.assertEqual(tf(States._4, '9'), (States.NEUTRAL, ""))
         
         self.assertEqual(tf(States.CHECK, '0'), (States.NEUTRAL, ""))
@@ -105,7 +105,7 @@ class Test(unittest.TestCase):
         self.assertEqual(tf(States.CHECK, '5'), (States.NEUTRAL, ""))
         self.assertEqual(tf(States.CHECK, '6'), (States.NEUTRAL, ""))
         self.assertEqual(tf(States.CHECK, '7'), (States.NEUTRAL, ""))
-        self.assertEqual(tf(States.CHECK, '8'), (States.NEUTRAL, ""))
+        self.assertEqual(tf(States.CHECK, '8'), (States._1, ""))
         self.assertEqual(tf(States.CHECK, '9'), (States.NEUTRAL, ""))
     
     #

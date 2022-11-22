@@ -34,63 +34,71 @@ def make_FA_logic(
             
         """  """
         
-        match q:
+        if q == FAStates.NEUTRAL:
+                
+            if (letter == PASSCODE[0]):
+                return (FAStates._1, "")
+            elif (letter.isdigit()):
+                return (FAStates.NEUTRAL, "")
+            else:
+                return (q, "")
+                    
+        elif q == FAStates._1:
             
-            case FAStates.NEUTRAL:
-                
-                if (letter == PASSCODE[0]):
-                    return (FAStates._1, "")
-                elif (letter.isdigit()):
-                    return (FAStates.NEUTRAL, "")
-                else:
-                    return (q, "")
+            if (letter == PASSCODE[1]):
+                return (FAStates._2, "")
+            elif (letter == PASSCODE[0]):
+                return (FAStates._1, "")
+            elif (letter.isdigit()):
+                return (FAStates.NEUTRAL, "")
+            else:
+                return (q, "")
                     
-            case FAStates._1:
+        elif q ==FAStates._2:
                 
-                if (letter == PASSCODE[1]):
-                    return (FAStates._2, "")
-                elif (letter.isdigit()):
-                    return (FAStates.NEUTRAL, "")
-                else:
-                    return (q, "")
+            if (letter == PASSCODE[2]):
+                return (FAStates._3, "")
+            elif (letter == PASSCODE[0]):
+                return (FAStates._1, "")
+            elif (letter.isdigit()):
+                return (FAStates.NEUTRAL, "")
+            else:
+                return (q, "")
                     
-            case FAStates._2:
+        elif q ==FAStates._3:
                 
-                if (letter == PASSCODE[2]):
-                    return (FAStates._3, "")
-                elif (letter.isdigit()):
-                    return (FAStates.NEUTRAL, "")
-                else:
-                    return (q, "")
+            if (letter == PASSCODE[3]):
+                return (FAStates._4, "")
+            elif (letter == PASSCODE[0]):
+                return (FAStates._1, "")
+            elif (letter.isdigit()):
+                return (FAStates.NEUTRAL, "")
+            else:
+                return (q, "")
                     
-            case FAStates._3:
+        elif q ==FAStates._4:
                 
-                if (letter == PASSCODE[3]):
-                    return (FAStates._4, "")
-                elif (letter.isdigit()):
-                    return (FAStates.NEUTRAL, "")
-                else:
-                    return (q, "")
-                    
-            case FAStates._4:
-                
-                if (letter == PASSCODE[4]):
-                    return (FAStates.CHECK, "")
-                elif (letter.isdigit()):
-                    return (FAStates.NEUTRAL, "")
-                else:
-                    return (q, "")
+            if (letter == PASSCODE[4]):
+                return (FAStates.CHECK, "")
+            elif (letter == PASSCODE[0]):
+                return (FAStates._1, "")
+            elif (letter.isdigit()):
+                return (FAStates.NEUTRAL, "")
+            else:
+                return (q, "")
             
-            case FAStates.CHECK:
+        elif q ==FAStates.CHECK:
                 
-                if (letter == LOCK_CODE):
-                    return (FAStates.NEUTRAL, "LOCK\n")
-                elif (letter == UNLOCK_CODE): 
-                    return (FAStates.NEUTRAL, "UNLOCK\n")
-                elif (letter.isdigit()):
-                    return (FAStates.NEUTRAL, "")
-                else:
-                    return (q, "")
+            if (letter == LOCK_CODE):
+                return (FAStates.NEUTRAL, "LOCK\n")
+            elif (letter == UNLOCK_CODE): 
+                return (FAStates.NEUTRAL, "UNLOCK\n")
+            elif (letter == PASSCODE[0]):
+                return (FAStates._1, "")
+            elif (letter.isdigit()):
+                return (FAStates.NEUTRAL, "")
+            else:
+                return (q, "")
     
     return (FAStates, transition_function, FAStates.NEUTRAL)
 
